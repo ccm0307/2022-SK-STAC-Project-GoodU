@@ -45,3 +45,53 @@ function gLogOut() {
       }
     );
 }
+
+/**
+ * 카카오페이 결제
+ * @param {금액} won
+ * @param {갯수} cointCount
+ */
+function kakaopay(won, coinCount) {
+  if (userLogin == true) { // 로그인 상태일 시
+    var IMP = window.IMP; // 팝업창 띄우기
+    IMP.init("imp61861566"); // 가맹점 식별번호
+    console.log(userDoc);
+    IMP.request_pay(
+      {
+        pg: "kakaopay",
+        pay_method: "kakaopay ",
+        merchant_uid: "123456789" + new Date().getTime(),
+        name: "온칩 결제" + "(" + coinCount + "개" + ")",
+        amount: won,
+        buyer_email: userEmail,
+        buyer_name: userName,
+      },
+      function (rsp) {
+        if (rsp.success) {
+          // 결제 성공시
+          console.log("coin success");
+          var msg = "결제가 완료되었습니다.";
+          location.href = "/main.html"; // 메인 페이지 이동
+        } else {
+          var msg = "결제에 실패하였습니다.";
+          rsp.error_msg; // 에러 메세지 띄워주기
+        }
+      }
+    );
+    db.collection("coin")
+      .doc(userDoc) // 유저 코인정보
+      .set({
+        coin: coinCount + userCoin, // 코인 추가 해주기
+      });
+    db.collection("payment").add({ // 결제 내역 추가
+      coin: coinCount, // 온칩 개수
+      amount: won, // 가격
+      month: new Date().getMonth() + 1, // 월
+      date: new Date().getDate(), // 일
+      hour: new Date().getHours(), // 시
+      minute: new Date().getMinutes(), // 분
+    });
+  } else { // 로그아웃 상태일 시
+    alert("로그인을 먼저 해주세요!");
+  }
+}
