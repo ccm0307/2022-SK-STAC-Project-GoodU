@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기기관리</title>
+    <link rel="stylesheet" href="./CSS/management.css">
+    <script src="https://kit.fontawesome.com/2d62f67ec1.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="div">
+
+        <div class="modal-bg ">
+            <div class="white-box">
+                <h3>기기 추가</h3>
+                <br>
+                <hr>
+                <small>이름 :</small>
+                <input type="text" maxlength="5" placeholder="이름을 입력해주세요." required><br>
+                <small>리터 :</small>
+                <input type="text" maxlength="4" placeholder="리터를 입력해주세요." required><br>
+                <!-- <input type="text" maxlength="5" placeholder="이름을 입력해주세요." required><br> -->
+                <button id="submit">확인</button>
+            </div>
+        </div>
+
+        <script>
+            $('#submit').on('click',function(){
+                $('.modal-bg').removeClass('show')
+            })
+        </script>
+        <!-- 제목 -->
+        <div class="mypage">
+            <a href="./index.html"><i class="fa-solid fa-angle-left"></i></a>
+            <h4>기기관리</h4>
+        </div>
+
+        <!-- 기기 선택 -->
+        <span class="input-container">
+            <small class="liter">2L</small>
+            <button class="input-box">
+                <div>
+                    <input class="checked" type="checkbox" id="1" name="goodyou" checked="checked">
+                    <label for="1">굿유 1</label>
+                    <br>
+                    <small>사용중</small>
+                </div>
+
+                <a href="#">삭제</a>
+            </button>
+
+            <small class="liter">5L</small>
+            <button class="input-box">
+                <div>
+                    <input type="checkbox" id="2" name="goodyou">
+                    <label for="2">굿유 2</label>
+                    <br>
+                    <span class="on-off"></span>
+                    <small>휴식중</small>
+                </div>
+
+                <a href="#">삭제</a>
+            </button>
+
+
+            <button id="boxWrap" class="input-box">
+                <div>
+                    <input type="checkbox" id="3" name="goodyou">
+                    <label for="3">굿유 3</label>
+                    <br>
+                    <small>휴식중</small>
+                </div>
+                
+                <a href="#">삭제</a>
+            </button>
+
+            <button id="plus">
+                + 기기 등록하기
+            </button>
+        </span>
+
+        <script>
+            // 모달창
+            $('#plus').on('click',function(){
+                $('.modal-bg').addClass('show')
+            })
+        </script>
+
+    </div>
+</html>
